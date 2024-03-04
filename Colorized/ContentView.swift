@@ -30,6 +30,20 @@ struct ContentView: View {
                     ColorSliderView(sliderValue: $blueValue, color: .blue)
                 }
                 .padding()
+                .toolbar {
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Spacer()
+
+                        Button("Done") {
+                            UIApplication.shared.sendAction(
+                                #selector(UIResponder.resignFirstResponder),
+                                to: nil,
+                                from: nil,
+                                for: nil
+                            )
+                        }
+                    }
+                }
                 
                 Spacer()
             }
@@ -46,8 +60,26 @@ struct ColorSliderView: View {
         HStack {
             Text(lround(sliderValue).formatted())
                 .foregroundStyle(.white)
+                .frame(width: 40)
+            
             Slider(value: $sliderValue, in: 0...255, step: 1)
                 .tint(color)
+            
+            TextField(
+                "",
+                text: Binding(
+                    get: {
+                        String(lround(sliderValue))
+                    },
+                    set: { newValue in
+                        sliderValue = Double(newValue) ?? 0.0
+                    }
+                )
+            )
+            .frame(width: 50)
+            .multilineTextAlignment(.trailing)
+            .textFieldStyle(.roundedBorder)
+            .keyboardType(.numberPad)
         }
     }
 }
