@@ -9,16 +9,24 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        ZStack {
+            Color(red: 0.13, green: 0.34, blue: 0.69)
+                .ignoresSafeArea()
+            VStack(spacing: 20) {
+                ColorView()
+                VStack(spacing: 15) {
+                    ColorSliderView(color: .red)
+                    ColorSliderView(color: .green)
+                    ColorSliderView(color: .blue)
+                }
+                .padding()
+                Spacer()
+            }
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
 }
+
