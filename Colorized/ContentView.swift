@@ -79,6 +79,7 @@ struct ColorSliderView: View {
             .frame(width: 50)
             .multilineTextAlignment(.trailing)
             .textFieldStyle(.roundedBorder)
+            .colorMultiply(.white)
             .keyboardType(.numberPad)
         }
     }
